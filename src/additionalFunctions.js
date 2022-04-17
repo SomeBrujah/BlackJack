@@ -35,61 +35,47 @@ function addElement(parent, element) {
 
 function inizializePlayersZone(parent, players) {
     for(let i = 0; i < players.length; i++) {
-        const playerSectionBlock = document.createElement('div');
-        const playerNameBlock = document.createElement('div');
-        const playerNameText = document.createElement('p');
-        const playerScoreBlock = document.createElement('div');
-        const playerScoreText = document.createElement('p');
-        const playerCardBlock = document.createElement('div');
+        const player_section = document.createElement('div');
+        const player_name = document.createElement('h1');
+        const player_score = document.createElement('h1');
+        const player_card = document.createElement('div');
 
-        playerSectionBlock.id = players[i].name;
-        playerSectionBlock.className = 'player_section_block';
-        playerNameBlock.className = 'player_name_block  section';
-        playerNameText.className = 'player_name_text';
-        playerScoreBlock.className = 'player_score_block  section';
-        playerScoreText.className = 'player_score_text';
-        playerCardBlock.className = 'player_card_block  section';
+        player_section.id = players[i].name;
+        player_section.classList.add('player_section');
+        player_section.classList.add('section');
+        player_name.textContent = players[i].name;
+        player_name.id = `${players[i].name}_name`;
+        player_name.classList.add('section');
+        player_name.classList.add('player_name');
+        player_score.textContent = players[i].scores;
+        player_score.id = `${players[i].name}_score`;
+        player_score.classList.add('score');
+        player_score.classList.add('section');
+        player_card.id = `${players[i].name}_cards`;
+        player_card.classList.add('section');
+        player_card.classList.add('card_section');
 
-        playerSectionBlock.appendChild(playerNameBlock);
-        playerSectionBlock.appendChild(playerScoreBlock);
-        playerSectionBlock.appendChild(playerCardBlock);
-
-        playerNameBlock.appendChild(playerNameText);
-        playerScoreBlock.appendChild(playerScoreText);
-
-        playerNameText.textContent = players[i].name;
-        playerScoreText.textContent = players[i].scores;
-
-        parent.appendChild(playerSectionBlock);
+        player_section.append(player_name, player_score, player_card);
+        parent.appendChild(player_section);
     }
 }
 
 function addCart(player, card){
-    const playerArea = document.getElementById(player.name);
-    
-    const cardWrapp = document.createElement('div');
-    const cardValueUpper = document.createElement('div');
-    const cardValueUpperText = document.createElement('p');
-    const cardValueBottom = document.createElement('div');
-    const cardValueBottomText = document.createElement('p');
+    const hand = document.querySelector(`#${player.name}_cards`);
 
-    cardWrapp.className = 'card_wrapp';
-    cardValueUpper.className = 'card_value_upper';
-    cardValueUpperText.className = 'card_value_upper_text';
-    cardValueBottom.className = 'card_value_bottom';
-    cardValueBottomText.className = 'card_value_bottom_text';
+    const player_card = document.createElement('div');
+    const card_upper = document.createElement('div');
+    const card_bottom = document.createElement('div');
 
-    cardWrapp.appendChild(cardValueUpper);
-    cardWrapp.appendChild(cardValueBottom);
+    player_card.classList.add('card');
+    card_upper.classList.add('card_upper');
+    card_bottom.classList.add('card_bottom');
 
-    cardValueUpper.appendChild(cardValueUpperText);
-    cardValueBottom.appendChild(cardValueBottomText);
+    card_upper.textContent = `${card.value}${card.suit}`;
+    card_bottom.textContent =`${card.value}${card.suit}`;
 
-    cardValueUpperText.textContent = `${card.value}${card.suit}`;
-    cardValueBottomText.textContent = `${card.value}${card.suit}`;
-
-    playerArea.childNodes[1].firstChild.textContent = player.scores;
-    playerArea.lastChild.appendChild(cardWrapp);
+    player_card.append(card_upper, card_bottom);
+    hand.appendChild(player_card);
 }
 
 export {

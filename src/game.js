@@ -59,7 +59,8 @@ export class Game {
                 console.log(`Draw!`);
                 return this.winners;
             }
-            console.log(`Player ${this.winners[0].name} win this game, by collect 21 scores!`)
+            console.log(`Player ${this.winners[0].name} win this game, by collect 21 scores!`);
+            this.gameIsEnd = true;
             return  this.winners[0];
         }
         // If among the players there are NOT those who scored 21
@@ -75,6 +76,7 @@ export class Game {
             return remPlayers.filter((player)=>{ return player.scores === winner.scores});
         }
         console.log(`Player ${winner.name} win this game, by number of scores`);
+        this.gameIsEnd = true;
         return winner;
     }
 }

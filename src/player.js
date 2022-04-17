@@ -7,7 +7,7 @@ export class Player {
     }
 
     hit() {
-        if(this.game.winners.length > 0) {
+        if(this.game.gameIsEnd === true) {
             return;
         }
         this.cards.push(this.game.deck.pop());
@@ -22,7 +22,7 @@ export class Player {
         if(this.game.players.indexOf(this) !== (this.game.players.length - 1)) {
             this.game.currentPlayer = this.game.players[this.game.players.indexOf(this) + 1];
             if(this.game.currentPlayer.scores === 21) {
-                console.log(`Player ${this.game.currentPlayer.name} already have 21! Move is ${this.game.players[this.game.players.indexOf(this.game.currentPlayer) + 1].name}`);
+                // console.log(`Player ${this.game.currentPlayer.name} already have 21! Move is ${this.game.players[this.game.players.indexOf(this.game.currentPlayer) + 1].name}`);
                 this.game.currentPlayer.stand();
             }
             console.log(`Player ${this.game.players[this.game.players.indexOf(this.game.currentPlayer) - 1].name} is stand, move is ${this.game.currentPlayer.name}`)
