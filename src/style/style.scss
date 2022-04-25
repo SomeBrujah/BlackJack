@@ -105,7 +105,7 @@
     height: 100vh;
     background-color: rgba(128, 128, 128, 0.507);
     z-index: 3;
-    visibility: hidden;
+    display: none;
 }
 
 .popup {
@@ -118,5 +118,5 @@
     border: 2px solid black;
     border-radius: 10px;
     z-index: 4;
-    visibility: hidden;
+    display: none;
 }

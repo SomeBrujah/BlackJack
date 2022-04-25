@@ -7,7 +7,7 @@ import './style/style.scss'
 const hitButton = document.querySelector('.hit');
 const standButton = document.querySelector('.stand');
 const cardDesk = document.querySelector('.card_desk');
-const overlay = document.querySelector('.overlay').style.visibility = 'visible';
+const overlay = document.querySelector('.overlay');
 const popup = document.querySelector('.popup');
 
 const game = new Game([new Player('Alex'), new Player('Roman'), new Player('Jack')]);
@@ -51,10 +51,12 @@ const gameLoop = setInterval(function(){
     }
     // Check state of all players
     if(game.gameIsEnd === true) {
-        overlay.style.visibility = 'visible';
-        popup.style.visibility = 'visible';
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
     }
     // Render visual part for all player
       // Check player move
       
-}, 1000)
+}, 1000);
+
+export default game;
