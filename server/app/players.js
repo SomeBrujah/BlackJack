@@ -2,15 +2,12 @@ class Player {
     constructor(name) {
         this.name = name;
         this.cards = [];
-        this.game = null;
+        this.standStatus = false;
         this.scores = 0;
     }
 
-    hit() {
-        if(this.game.gameIsEnd === true) {
-            return;
-        }
-        this.cards.push(this.game.deck.pop());
+    hit(deck) {
+        this.cards.push(deck.pop());
         this.calculateForAces();
         this.scores = this.totalScore();
         console.log(`Player ${this.name} take a card and his scores is: ${this.scores}`);
@@ -19,17 +16,7 @@ class Player {
     }
 
     stand() {
-        if(this.game.players.indexOf(this) !== (this.game.players.length - 1)) {
-            this.game.currentPlayer = this.game.players[this.game.players.indexOf(this) + 1];
-            if(this.game.currentPlayer.scores === 21) {
-                this.game.currentPlayer.stand();
-            }
-            console.log(`Player ${this.game.players[this.game.players.indexOf(this.game.currentPlayer) - 1].name} is stand, move is ${this.game.currentPlayer.name}`)
-        } else {
-            console.log(`All players have taken their turn.`)
-            this.game.gameIsEnd = true;
-            this.game.checkState();
-        }
+        this.standStatus = true;
     }
 
     isTwentyOne() {

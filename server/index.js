@@ -6,15 +6,14 @@ const app = new Koa();
 const router = new Router();
 
 const game = new Game([new Player('Jesica'), new Player('Jack')]);
-game.start();
 
 router.post('/hit', async (ctx) => {
-    game.currentPlayer.hit();
+    game.currentPlayerHit();
     ctx.body = game;
 });
 
 router.post('/stand', async (ctx) => {
-    game.currentPlayer.stand();
+    game.currentPlayerStand();
     ctx.body = game;
 })
 
