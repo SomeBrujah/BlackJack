@@ -10,6 +10,7 @@ class Game {
         this.gameIsEnd = false;
         this.isDraw = false;
         this.winners = [];
+        this.resultString = '';
         this.start();
     }
 
@@ -53,7 +54,7 @@ class Game {
             this.currentPlayer = this.players[this.players.indexOf(this.currentPlayer) + 1];
             console.log(`The move goes to ${this.currentPlayer.name}`);
         } else {
-            this.checkState();
+            // this.checkState();
         }
 
     }
@@ -74,6 +75,7 @@ class Game {
         });
         if (remPlayers.length === 0) {
             console.log('Draw!');
+            this.resultString = 'Draw';
             this.isDraw = true;
             return null;
         }
@@ -81,11 +83,14 @@ class Game {
         if (remPlayers.some((player) => { return player.scores === 21 })) {
             this.winners = remPlayers.filter((player) => { return player.scores === 21 });
             if (this.winners.length > 1) {
+                this.resultString = 'Draw';
+                this.gameIsEnd = true;
                 this.isDraw = true;
                 console.log(`Draw!`);
                 return this.winners;
             }
             console.log(`Player ${this.winners[0].name} win this game, by collect 21 scores!`);
+            this.resultString = this.winners[0].name;
             this.gameIsEnd = true;
             return this.winners[0];
         }
@@ -97,11 +102,14 @@ class Game {
             }
         }
         if (remPlayers.filter((player) => { return player.scores === winner.scores }).length > 1) {
+            this.resultString = 'Draw';
+            this.gameIsEnd = true;
             this.isDraw = true;
             console.log(`Draw!`);
             return remPlayers.filter((player) => { return player.scores === winner.scores });
         }
         console.log(`Player ${winner.name} win this game, by number of scores`);
+        this.resultString = winner.name;
         this.gameIsEnd = true;
         return winner;
     }
