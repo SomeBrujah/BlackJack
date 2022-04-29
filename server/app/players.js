@@ -7,6 +7,10 @@ class Player {
     }
 
     hit(deck) {
+        if (this.scores > 21 || this.scores === 21) {
+            this.standStatus = true;
+            return;
+        }
         this.cards.push(deck.pop());
         this.calculateForAces();
         this.scores = this.totalScore();
