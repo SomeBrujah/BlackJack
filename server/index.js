@@ -11,6 +11,17 @@ let game = new Game([new Player('Jesica'), new Player('Jack')]);
 
 app.use(serve(path.join(__dirname, 'public')));
 
+const someMiddleWare = (ctx, next) => {
+    // check tokens exist
+    // check is token valid
+    if (!OK) {
+        ctx.statusCode = 401;
+        return;
+    }
+    // If all is good
+    return next();
+}
+
 router.post('/getGame', async (ctx) => {
     console.log('Game state is getted.');
     ctx.body = game;
@@ -28,7 +39,7 @@ router.post('/stand', async (ctx) => {
     ctx.body = game;
 })
 
-router.post('/restart', async (ctx) =>{
+router.post('/restart', async (ctx) => {
     game = new Game([new Player('Jesica'), new Player('Jack')]);
     ctx.body = game;
 })
