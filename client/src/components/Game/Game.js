@@ -3,10 +3,17 @@ import ActionButton from '../ActionButton/ActionButton';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import Player from '../Player/Player';
 import Card from '../Card/Card';
+import { useNavigate } from 'react-router-dom';
+import Login from '../pages/Login/Login';
 
 const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, gameState }) => {
-    console.log('Component game is moudnt');
+    // const navigate = useNavigate();
+
     useEffect(() => {
+        if(!gameState.token) {
+            console.log('Need redirect to Login page');
+            // navigate('../pages/Login/Login');
+        }
         updateState()
     }, []);
 

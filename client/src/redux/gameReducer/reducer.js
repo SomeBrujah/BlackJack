@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import { updateState , hitCurrentPlayer, standCurrentPlayer, restartGame} from './actions';
 
 const defaultState = {
+    token: localStorage.getItem('token'),
     loading: false,
     deck: null,
     players: [],
