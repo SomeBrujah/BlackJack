@@ -1,4 +1,4 @@
-import './style/reset.scss';
+// import './style/reset.scss';
 import './style/style.scss';
 
 import React from 'react';
@@ -13,10 +13,10 @@ const root = createRoot(container);
 
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
+        <BrowserRouter>
+            <Provider store={store}>
                 <App />
-            </BrowserRouter>
-        </Provider>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>
 )

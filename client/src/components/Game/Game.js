@@ -4,17 +4,17 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import Player from '../Player/Player';
 import Card from '../Card/Card';
 import { useNavigate } from 'react-router-dom';
-import Login from '../pages/Login/Login';
 
 const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, gameState }) => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if(!gameState.token) {
-            console.log('Need redirect to Login page');
-            // navigate('../pages/Login/Login');
-        }
         updateState()
+        if (!gameState.token) {
+            console.log('Need redirect to Login page');
+            navigate('/login');
+            // navigate(0);
+        }
     }, []);
 
     return (
@@ -22,7 +22,7 @@ const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, 
             <div className='overlay' style={gameState.gameIsEnd === true ? { display: 'block' } : { display: 'none' }}>
                 <div className='popup'>
                     <h1 className='resultText'>{gameState.result}</h1>
-                    <ActionButton onClick={restartGame} title='Restart' disabled={gameState.loading ? true : false}/>
+                    <ActionButton onClick={restartGame} title='Restart' disabled={gameState.loading ? true : false} />
                 </div>
             </div>
             <div className='card_desk'>
@@ -45,7 +45,7 @@ const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, 
             <div className='sidebar'>
                 <div className='card_deck'></div>
                 <ActionButton onClick={hitCurrentPlayer} title='Hit' />
-                <ActionButton onClick={standCurrentPlayer} title='Stand'/>
+                <ActionButton onClick={standCurrentPlayer} title='Stand' />
             </div>
         </div>
     )
