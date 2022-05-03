@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, gameState }) => {
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         if (!gameState.token) {

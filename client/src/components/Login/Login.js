@@ -13,7 +13,7 @@ const Login = ({ loginInGame, gameState }) => {
   }, [gameState.token])
 
   console.log(gameState);
-  const [inputs, setInput] = useState([]);
+  const [inputs, setInput] = useState([<FormInput index={1} key={1}/>, <FormInput index={2} key={2}/>]);
 
   const removePlayer = () => {
     const newState = inputs;
@@ -44,9 +44,8 @@ const Login = ({ loginInGame, gameState }) => {
     <div className='login_modale'>
       <form className='login_form' onSubmit={handleSubmit} id='sendForm'>
         {inputs}
-        <button type='button' onClick={addPlayer} key='buttonAddPlayers'>Add Player</button>
-        <button type='button' onClick={handleSubmit} key='buttonShowData'>Send request</button>
-        <button type='submit' key='sendRequest'>Send</button>
+        <button className='buttons' type='button' onClick={addPlayer} key='buttonAddPlayers'>Add Player</button>
+        <button className='buttons' type='button' onClick={handleSubmit} key='buttonShowData'>Go to game</button>
       </form>
     </div>
   )

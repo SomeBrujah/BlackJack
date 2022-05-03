@@ -5,7 +5,7 @@ const FormInput = ({index, removeFunc}) => {
         <label className='form_input' key={`${index}set`}>
             Player {index}:
             <input type='text' id={`Player${index}`}/>
-            <button onClick={removeFunc} type='button'>X</button>
+            <button className='deleteButton' onClick={removeFunc} type='button'>X</button>
         </label>
     )
 }

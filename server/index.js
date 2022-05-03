@@ -26,18 +26,15 @@ const auth = (ctx, next) => {
         return;
     }
 
-    const session = null;
+    const session = jwt.verify(token, secretJWTKey);
 
-    try {
-        session = jwt.verify(token, secretJWTKey);
-    } catch (error) {
-        console.log('TOKEN NOT VALIDATED');
-        console.log(gameList);
-        ctx.status = 401;
-        ctx.body = ctx.status;
-
-        return;
-    }
+    // try {
+    //     session = jwt.verify(token, secretJWTKey);
+    // } catch (error) {
+    //     console.log('TOKEN NOT VALIDATED');
+    //     ctx.status = 401;
+    //     return;
+    // }
 
     ctx.state.session = session;
 
@@ -60,8 +57,12 @@ const checkGame = (ctx, next) => {
 const login = (ctx) => {
     const players = ctx.request.body; // array of players names
 
-    if (!Array.isArray(players) && !players.every((element) => { typeof element === 'string' }) && players.length > 2) {
+    if (!Array.isArray(players) || players.every((element) => { typeof element === 'string' }) || players.length < 2) {
+        console.log(Array.isArray(players));
+        console.log(players.every((element) => { typeof element === 'string' }));
+        console.log(players.length < 2);
         ctx.status = 422;
+        return
     }
 
     //create session
@@ -83,19 +84,21 @@ const getState = (ctx) => {
 };
 const hitController = (ctx) => {
     const game = ctx.state.game;
-    game.hitCurrentPlayer();
+    game.currentPlayerHit();
     ctx.body = game;
 };
 const standController = (ctx) => {
     const game = ctx.state.game;
-    game.standCurrentPlayer();
+    game.currentPlayerStand();
     ctx.body = game;
 };
 const restartController = (ctx) => {
-    const playerList = ctx.request.body;
-    const game = ctx.state.game;
-    game = new Game(playerList.map(name => new Player(name)));
-    ctx.body = game;
+    let game = ctx.state.game;
+    let session = ctx.state.session;
+    game = new Game(game.players.map(player => new Player(player.name)));
+
+    gameList[session.id] = game;
+    ctx.body = gameList[session.id];
 };
 
 // Our routes with requset

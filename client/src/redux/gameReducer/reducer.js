@@ -32,6 +32,7 @@ const gameReducer = handleActions({
         }
     },
     [updateState]: state => ({...state, loading: true}),
+    [updateState + '_FAILURE']: (state, payload) => ({...state, loading: false}),
     [updateState + '_SUCCESS']: (state, payload) => {
         const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} = payload.payload.data;
         return {
