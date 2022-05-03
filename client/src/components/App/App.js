@@ -1,7 +1,8 @@
 import React from 'react'
 import Game from '../Game/index';
 import { Routes, Route } from 'react-router-dom';
-import Login from '../pages/Login/Login';
+import Login from '../Login/index';
+
 const App = () => {
   return (
     <div>
@@ -10,7 +11,6 @@ const App = () => {
         <Route path='/login' element={<Login />}/>
         <Route path='*' element={<Game />}/>
       </Routes>
-      <Game />
     </div>
   )
 }

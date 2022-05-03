@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { updateState , hitCurrentPlayer, standCurrentPlayer, restartGame} from './actions';
+import { loginInGame, updateState , hitCurrentPlayer, standCurrentPlayer, restartGame} from './actions';
 
 const defaultState = {
     token: localStorage.getItem('token'),
@@ -14,6 +14,23 @@ const defaultState = {
 };
 
 const gameReducer = handleActions({
+    [loginInGame]: state => ({...state, loading: true}),
+    [loginInGame + '_SUCCESS']: (state, payload) => {
+        const {token, game} = payload.payload.data;
+        localStorage.setItem('token', token);
+        return {
+            ...state,
+            token: token,
+            loading: false,
+            deck: game.deck,
+            players: game.players,
+            currentPlayer: game.currentPlayer,
+            gameIsEnd: game.gameIsEnd,
+            isDraw: game.isDraw,
+            winners: game.winners,
+            result: game.resultString
+        }
+    },
     [updateState]: state => ({...state, loading: true}),
     [updateState + '_SUCCESS']: (state, payload) => {
         const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} = payload.payload.data;

@@ -1,29 +1,49 @@
 import { createAction } from "redux-actions";
 
+export const loginInGame = createAction('LOGIN', (data)=>({
+    request: {
+        method: 'post',
+        url: '/login',
+        data: data
+    }
+}));
+
 export const updateState = createAction('UPDATE_STATE', ()=>({
     request: {
         method: 'post',
-        url: '/getGame'
-    }
+        url: '/getGame',
+        headers: {
+            Authorization: localStorage.getItem('token')
+        }
+    }   
 }));
 
 export const hitCurrentPlayer = createAction('HIT', ()=>({
     request: {
         method: 'post',
-        url: '/hit'
+        url: '/hit',
+        headers: {
+            Authorization: localStorage.getItem('token')
+        }
     }
 }));
 
 export const standCurrentPlayer = createAction('STAND', ()=>({
     request: {
         method: 'post',
-        url: '/stand'
+        url: '/stand',
+        headers: {
+            Authorization: localStorage.getItem('token')
+        }
     }
 }));
 
 export const restartGame = createAction('RESTART', ()=>({
     request: {
         method: 'post',
-        url: '/restart'
+        url: '/restart',
+        headers: {
+            Authorization: localStorage.getItem('token')
+        }
     }
 }));

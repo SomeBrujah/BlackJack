@@ -9,12 +9,11 @@ const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, 
     const navigate = useNavigate();
 
     useEffect(() => {
-        updateState()
         if (!gameState.token) {
             console.log('Need redirect to Login page');
             navigate('/login');
-            // navigate(0);
         }
+        updateState()
     }, []);
 
     return (
