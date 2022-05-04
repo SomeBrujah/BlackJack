@@ -18,7 +18,7 @@ app.use(serve(path.join(__dirname, 'public')));
 
 // Our midlewares for routes
 const auth = (ctx, next) => {
-    const token = ctx.request.header['authorization'];
+    const token = ctx.request.header['authorization'].split(' ')[1];
 
     if (!token) {
         console.log('Auth error by TOKEN is NOT EXIST');
@@ -45,7 +45,8 @@ const checkGame = (ctx, next) => {
 
     if (!gameList[session.id]) {
         ctx.status = 401;
-        return;
+
+        return
     }
 
     ctx.state.game = gameList[session.id];

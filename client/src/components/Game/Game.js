@@ -7,14 +7,17 @@ import { useNavigate } from 'react-router-dom';
 
 const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, gameState }) => {
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
         if (!gameState.token) {
             console.log('Need redirect to Login page');
             navigate('/login');
         }
-        updateState()
+        if (gameState.toLogin === true) {
+            navigate('/login');
+        }
+        updateState();
     }, []);
 
     return (

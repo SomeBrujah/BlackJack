@@ -13,7 +13,7 @@ export const updateState = createAction('UPDATE_STATE', ()=>({
         method: 'post',
         url: '/getGame',
         headers: {
-            Authorization: localStorage.getItem('token')
+            Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }   
 }));
@@ -23,7 +23,7 @@ export const hitCurrentPlayer = createAction('HIT', ()=>({
         method: 'post',
         url: '/hit',
         headers: {
-            Authorization: localStorage.getItem('token')
+            Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }
 }));
@@ -33,7 +33,7 @@ export const standCurrentPlayer = createAction('STAND', ()=>({
         method: 'post',
         url: '/stand',
         headers: {
-            Authorization: localStorage.getItem('token')
+            Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }
 }));
@@ -43,7 +43,7 @@ export const restartGame = createAction('RESTART', ()=>({
         method: 'post',
         url: '/restart',
         headers: {
-            Authorization: localStorage.getItem('token')
+            Authorization: 'Bearer ' + localStorage.getItem('token')
         }
     }
 }));

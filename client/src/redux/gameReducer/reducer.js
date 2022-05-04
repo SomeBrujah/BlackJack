@@ -32,7 +32,6 @@ const gameReducer = handleActions({
         }
     },
     [updateState]: state => ({...state, loading: true}),
-    [updateState + '_FAILURE']: (state, payload) => ({...state, loading: false}),
     [updateState + '_SUCCESS']: (state, payload) => {
         const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} = payload.payload.data;
         return {
@@ -45,6 +44,13 @@ const gameReducer = handleActions({
             isDraw: isDraw,
             winners: winners,
             result: resultString
+        }
+    },
+    [updateState + '_FAIL']: (state) => {
+        localStorage.clear();
+        return {
+            ...state,
+            loading: false
         }
     },
     [hitCurrentPlayer]: state => ({...state, loading: true}),
