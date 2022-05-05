@@ -1,3 +1,9 @@
+mongoose = require('mongoose');
+const User = require('../mongoose_model/User');
+mongoose.connect('mongodb://localhost:3000/test');
+const user = new User({ name: "Max", age: 26 });
+user.save();
+
 const Router = require('koa-router');
 const router = new Router();
 const jwt = require('jsonwebtoken');
@@ -34,7 +40,7 @@ const auth = (ctx, next) => {
 
     return next();
 };
-    
+
 const checkGame = (ctx, next) => {
     const session = ctx.state.session;
 

@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { loginInGame, updateState , hitCurrentPlayer, standCurrentPlayer, restartGame} from './actions';
+import { loginInGame, updateState, hitCurrentPlayer, standCurrentPlayer, restartGame } from './actions';
 
 const defaultState = {
     token: localStorage.getItem('token'),
@@ -10,13 +10,13 @@ const defaultState = {
     gameIsEnd: false,
     isDraw: false,
     winners: [],
-    result: ''
+    resultString: ''
 };
 
 const gameReducer = handleActions({
-    [loginInGame]: state => ({...state, loading: true}),
+    [loginInGame]: state => ({ ...state, loading: true }),
     [loginInGame.success]: (state, payload) => {
-        const {token, game} = payload.payload.data;
+        const { token, game } = payload.payload.data;
         localStorage.setItem('token', token);
         return {
             ...state,
@@ -28,22 +28,16 @@ const gameReducer = handleActions({
             gameIsEnd: game.gameIsEnd,
             isDraw: game.isDraw,
             winners: game.winners,
-            result: game.resultString
+            resultString: game.resultString
         }
     },
-    [updateState]: state => ({...state, loading: true}),
+    [updateState]: state => ({ ...state, loading: true }),
     [updateState.success]: (state, payload) => {
-        const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} = payload.payload.data;
+        const data = payload.payload.data;
         return {
             ...state,
             loading: false,
-            deck: deck,
-            players: players,
-            currentPlayer: currentPlayer,
-            gameIsEnd: gameIsEnd,
-            isDraw: isDraw,
-            winners: winners,
-            result: resultString
+            data
         }
     },
     [updateState.fail]: (state) => {
@@ -54,48 +48,31 @@ const gameReducer = handleActions({
             token: null
         }
     },
-    [hitCurrentPlayer]: state => ({...state, loading: true}),
+    [hitCurrentPlayer]: state => ({ ...state, loading: true }),
     [hitCurrentPlayer.success]: (state, payload) => {
-        const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} =  payload.payload.data;
+        const data = payload.payload.data;
         return {
             ...state,
             loading: false,
-            deck: deck,
-            players: players,
-            currentPlayer: currentPlayer,
-            gameIsEnd: gameIsEnd,
-            isDraw: isDraw,
-            winners: winners,
-            result: resultString
+            data
         }
     },
-    [standCurrentPlayer]: state => ({...state, loading: true}),
+    [standCurrentPlayer]: state => ({ ...state, loading: true }),
     [standCurrentPlayer.success]: (state, payload) => {
-        const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} = payload.payload.data;
+        const data = payload.payload.data;
         return {
             ...state,
             loading: false,
-            deck: deck,
-            players: players,
-            currentPlayer: currentPlayer,
-            gameIsEnd: gameIsEnd,
-            isDraw: isDraw,
-            winners: winners,
-            result: resultString
+            data
         }
     },
-    [restartGame]: state => ({...state, loading: true}),
+    [restartGame]: state => ({ ...state, loading: true }),
     [restartGame.success]: (state, payload) => {
-        const {deck, players, currentPlayer, gameIsEnd, isDraw, winners} = payload.payload.data;
+        const data = payload.payload.data;
         return {
             ...state,
             loading: false,
-            deck: deck,
-            players: players,
-            currentPlayer: currentPlayer,
-            gameIsEnd: gameIsEnd,
-            isDraw: isDraw,
-            winners: winners
+            data
         }
     },
 }, defaultState);

@@ -15,6 +15,7 @@
     "koa-ejs": "^4.3.0",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
+    "mongoose": "^6.3.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
