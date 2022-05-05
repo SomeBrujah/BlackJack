@@ -15,7 +15,7 @@ const defaultState = {
 
 const gameReducer = handleActions({
     [loginInGame]: state => ({...state, loading: true}),
-    [loginInGame + '_SUCCESS']: (state, payload) => {
+    [loginInGame.success]: (state, payload) => {
         const {token, game} = payload.payload.data;
         localStorage.setItem('token', token);
         return {
@@ -32,7 +32,7 @@ const gameReducer = handleActions({
         }
     },
     [updateState]: state => ({...state, loading: true}),
-    [updateState + '_SUCCESS']: (state, payload) => {
+    [updateState.success]: (state, payload) => {
         const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} = payload.payload.data;
         return {
             ...state,
@@ -46,15 +46,16 @@ const gameReducer = handleActions({
             result: resultString
         }
     },
-    [updateState + '_FAIL']: (state) => {
-        localStorage.clear();
+    [updateState.fail]: (state) => {
+        localStorage.removeItem('token');
         return {
             ...state,
-            loading: false
+            loading: false,
+            token: null
         }
     },
     [hitCurrentPlayer]: state => ({...state, loading: true}),
-    [hitCurrentPlayer + '_SUCCESS']: (state, payload) => {
+    [hitCurrentPlayer.success]: (state, payload) => {
         const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} =  payload.payload.data;
         return {
             ...state,
@@ -69,7 +70,7 @@ const gameReducer = handleActions({
         }
     },
     [standCurrentPlayer]: state => ({...state, loading: true}),
-    [standCurrentPlayer + '_SUCCESS']: (state, payload) => {
+    [standCurrentPlayer.success]: (state, payload) => {
         const {deck, players, currentPlayer, gameIsEnd, isDraw, winners, resultString} = payload.payload.data;
         return {
             ...state,
@@ -84,7 +85,7 @@ const gameReducer = handleActions({
         }
     },
     [restartGame]: state => ({...state, loading: true}),
-    [restartGame + '_SUCCESS']: (state, payload) => {
+    [restartGame.success]: (state, payload) => {
         const {deck, players, currentPlayer, gameIsEnd, isDraw, winners} = payload.payload.data;
         return {
             ...state,
