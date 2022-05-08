@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FormInput from '../FormInput/FormInput';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const Login = ({ loginInGame, gameState }) => {
   const navigate = useNavigate();

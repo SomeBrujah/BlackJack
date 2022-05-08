@@ -6,7 +6,6 @@ const defaultState = {
     loading: false,
     deck: null,
     players: [],
-    currentPlayer: null,
     gameIsEnd: false,
     isDraw: false,
     winners: [],
@@ -17,27 +16,23 @@ const gameReducer = handleActions({
     [loginInGame]: state => ({ ...state, loading: true }),
     [loginInGame.success]: (state, payload) => {
         const { token, game } = payload.payload.data;
+        console.log(game);
         localStorage.setItem('token', token);
         return {
             ...state,
             token: token,
             loading: false,
-            deck: game.deck,
-            players: game.players,
-            currentPlayer: game.currentPlayer,
-            gameIsEnd: game.gameIsEnd,
-            isDraw: game.isDraw,
-            winners: game.winners,
-            resultString: game.resultString
+            ...game
         }
     },
     [updateState]: state => ({ ...state, loading: true }),
     [updateState.success]: (state, payload) => {
         const data = payload.payload.data;
+        const gameData = data;
         return {
             ...state,
             loading: false,
-            data
+            ...gameData
         }
     },
     [updateState.fail]: (state) => {
@@ -51,28 +46,33 @@ const gameReducer = handleActions({
     [hitCurrentPlayer]: state => ({ ...state, loading: true }),
     [hitCurrentPlayer.success]: (state, payload) => {
         const data = payload.payload.data;
+        const gameData = data;
+        console.log(gameData);
         return {
             ...state,
             loading: false,
-            data
+            ...gameData
         }
     },
     [standCurrentPlayer]: state => ({ ...state, loading: true }),
     [standCurrentPlayer.success]: (state, payload) => {
         const data = payload.payload.data;
+        const gameData = data;
         return {
             ...state,
             loading: false,
-            data
+            ...gameData
         }
     },
     [restartGame]: state => ({ ...state, loading: true }),
     [restartGame.success]: (state, payload) => {
         const data = payload.payload.data;
+        console.log(data);
+        const gameData = data;
         return {
             ...state,
             loading: false,
-            data
+            ...gameData
         }
     },
 }, defaultState);

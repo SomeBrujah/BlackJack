@@ -24,7 +24,7 @@ const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, 
         <div className='playing_field'>
             <div className='overlay' style={gameState.gameIsEnd === true ? { display: 'block' } : { display: 'none' }}>
                 <div className='popup'>
-                    <h1 className='resultText'>{gameState.result}</h1>
+                    <h1 className='resultText'>{gameState.resultString}</h1>
                     <ActionButton onClick={restartGame} title='Restart' disabled={gameState.loading ? true : false} />
                 </div>
             </div>
@@ -40,7 +40,7 @@ const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, 
                                     value={card.value}
                                 />
                             })}
-                            currenPlayerName={gameState.currentPlayer.name}
+                            isActive={player.isActive}
                         />
                     })
                     : <LoadingSpinner text={'Загрузка игроков'} />}
@@ -49,6 +49,7 @@ const Game = ({ updateState, hitCurrentPlayer, standCurrentPlayer, restartGame, 
                 <div className='card_deck'></div>
                 <ActionButton onClick={hitCurrentPlayer} title='Hit' />
                 <ActionButton onClick={standCurrentPlayer} title='Stand' />
+                <ActionButton onClick={restartGame} title='Restart' disabled={gameState.loading ? true : false} />
             </div>
         </div>
     )

@@ -3,7 +3,6 @@ import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 
 import gameReducer from './gameReducer/reducer';
-import { loginInGame } from './gameReducer/actions';
 
 const rootReducer = combineReducers({
     gameReducer
@@ -14,22 +13,23 @@ const client = axios.create({ //all axios can be used, shown in axios documentat
     responseType: 'json'
 });
 
-const token = (state) => state.gameReducer.token;
 
-const axiosMiddlewareConfig = {
+const middlewareConfig = {
     interceptors: {
         request: [
-            function ({ getState, dispatch }, req) {
+            function ({ getState }, req) {
+                const token = (state) => state.gameReducer.token;
                 const state = getState();
 
                 if (req.url === '/login') {
                     return req;
                 }
-
+                
                 req.headers['Authorization'] = 'Bearer ' + token(state);
+                return req;
             }
         ]
     }
 };
 
-export const store = createStore(rootReducer, applyMiddleware(axiosMiddleware(client, axiosMiddlewareConfig)));
+export const store = createStore(rootReducer, applyMiddleware(axiosMiddleware(client, middlewareConfig)));
